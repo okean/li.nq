@@ -4,6 +4,7 @@ gem 'rails', '3.2.11'
 gem 'sqlite3', '1.3.7'
 gem 'jquery-rails', '2.2.1'
 gem 'obscenity', '1.0.1'
+gem 'bootstrap-sass', '2.0.4.2'
 
 # Gems used only for assets and not required
 # in production environments by default.

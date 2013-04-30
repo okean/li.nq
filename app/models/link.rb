@@ -13,8 +13,8 @@ class Link < ActiveRecord::Base
     url = Url.find_by_original(original)
     return url.link if url
     if custom
-      link = Link.new(identifier: custom)
-      link.build_url(original: original)
+      link = Link.create!(identifier: custom)
+      link.create_url!(original: original)
       link.save
     else
       link = create_link(original)
@@ -28,7 +28,7 @@ class Link < ActiveRecord::Base
       url = Url.create!(original: original)
       identifier = url.id.to_s(36)
       if Link.find_by_identifier(identifier).nil? or !Obscenity.profane?(original)
-        link = Link.new(identifier: identifier)
+        link = Link.create!(identifier: identifier)
         link.url = url
         link.save
         link

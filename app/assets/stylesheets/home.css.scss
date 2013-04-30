@@ -1,0 +1,63 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "bootstrap";
+
+body {
+  padding-top: 20px;
+  padding-bottom: 40px;
+  font-family: "adelle",Georgia,Helvetica,Arial,sans-serif;
+  line-height: 24px;
+  font-size: 13px;
+}
+
+/* Custom container */
+.container-narrow {
+  margin: 0 auto;
+  max-width: 700px;
+}
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  margin-top: 60px 0;
+  text-align: center;
+}
+.jumbotron h1 {
+  font-size: 72px;
+  line-height: 1;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+
+.marketing p + h4 {
+  margin-top: 28px;
+}
+
+input, textarea {
+    width: 260px;
+}
+
+.form-url {
+  max-width: 500px;
+  padding-top: 19px;
+  margin: 0 auto 20px;
+          text-align: left;
+  background-color: #fff;
+  -webkit-border-radius: 5px;
+     -moz-border-radius: 5px;
+          border-radius: 5px;
+}
+
+.form-url input[type="text"] {
+  font-size: 16px;
+  height: auto;
+  padding: 7px 9px;
+}
