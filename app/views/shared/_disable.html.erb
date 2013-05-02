@@ -1,0 +1,8 @@
+<p class="lead">You currently have the preview feature enabled.</p>
+
+<%= form_tag "/a/preview/1", remote: true, method: :delete, class: "form-inline" do -%>
+    <span class="help-block">Click to disable preview</span>
+    <%= submit_tag 'Disable', class: "btn btn-success btn-primary" %>
+<% end -%>
+
+<p class="muted">The preview feature requires cookies to be enabled in your web browser.</p>

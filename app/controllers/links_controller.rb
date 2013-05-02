@@ -1,5 +1,20 @@
 class LinksController < ApplicationController
   
+  def short_url
+    @link = Link.find_by_identifier(params[:short_url])
+    
+    if @link.nil?
+      flash[:info] = "I couldn't find a link for the URL you clicked."
+      redirect_to root_path
+    else
+      if first_time_preview? or has_preview_enabled?
+        render 'short_url'
+      else
+        redirect_to @link.url.original, status: 301
+      end
+    end
+  end
+  
   def create
     custom = params[:custom].empty? ? nil : params[:custom]
     begin
@@ -7,7 +22,7 @@ class LinksController < ApplicationController
       if diff(@link.created_at) < 1
         flash[:success] = "A short Url was created! Share it!"
       else
-        flash[:notice] = "Current link is already shortened! Use it!"
+        flash[:info] = "Current link is already shortened! Use it!"
       end
     rescue => e 
       flash[:error] = e.message

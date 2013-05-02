@@ -1,0 +1,7 @@
+<div id="preview_form">
+  <% if has_preview_enabled? or first_time_preview? %>
+    <%= render 'shared/disable' %>
+  <% else %>
+    <%= render 'shared/enable' %>
+  <% end %>
+</div>

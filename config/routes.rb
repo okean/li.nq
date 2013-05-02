@@ -1,7 +1,11 @@
 Linq::Application.routes.draw do
+
   root :to => 'home#index'
 
   resources :links, only: [:create]
+  match "/:short_url" => "links#short_url"
+  
+  resources :preview, only: [:create, :destroy, :index], path: '/a/preview'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

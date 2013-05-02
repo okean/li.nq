@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe "Users" do
   
-  describe "creates short URLs" do
+  describe "create a short URL" do
     
     describe "on failure" do
       
@@ -32,6 +32,44 @@ describe "Users" do
                                                content: "A short Url was created!")
         end.should change(Link, :count).by(1)
       end
+    end
+  end
+  
+  describe "visit the short URL" do
+    
+    before(:each) do
+      @example_url = FactoryGirl.create(:example_url)
+      @url = root_path + @example_url.link.identifier
+    end
+    
+    context "dissabled preview" do
+      
+      it "should be redirected to original URL" do
+        test_disable_preview
+        visit @url
+        response.should redirect_to @example_url.original
+      end
+    end
+    
+    context "enabled preview" do
+      
+      it "should be redirected to 'preview' page" do
+        visit @url
+        response.should render_template('links/short_url')
+      end
+    end
+  end
+  
+  describe "enable/disable preview" do
+    
+    it "can disable and enable preview" do
+      visit root_path
+      click_link "Preview"
+      response.should render_template('preview/index')
+      click_button "Disable"
+      controller.should_not have_preview_enabled
+      click_button "Enable"
+      controller.should have_preview_enabled
     end
   end
 end

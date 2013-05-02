@@ -1,6 +1,6 @@
 <% if @link %>
     <% short_link = root_url + @link.identifier %>
-    url = "<%= escape_javascript(link_to(short_link, short_link)) %>"
+    url = "<%= escape_javascript(link_to(short_link, short_link, target: '_blank')) %>"
     $(".shorten_url").show();
     $(".shorten_url").html("<strong>Well done!</strong> " + url);
 <% end %>

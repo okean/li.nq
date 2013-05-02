@@ -108,4 +108,14 @@ RSpec.configure do |config|
   # the seed, which is printed after each run.
   #     --seed 1234
   config.order = "random"
+  
+  def test_enable_preview(options = { visit: true })
+    visit preview_index_path if options[:visit]
+    click_button :enable
+  end
+  
+  def test_disable_preview(options = { visit: true })
+    visit preview_index_path if options[:visit]
+    click_button :disable
+  end
 end
