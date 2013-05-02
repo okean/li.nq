@@ -1,6 +1,7 @@
 Linq::Application.routes.draw do
 
   root :to => 'home#index'
+  match "/a/about" => "home#about", as: "about"
 
   resources :links, only: [:create]
   match "/:short_url" => "links#short_url"

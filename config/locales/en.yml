@@ -3,3 +3,9 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    attributes:
+      url:
+        original: "Web address"
+      link:
+        identifier: "Custom name"

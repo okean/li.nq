@@ -16,4 +16,14 @@ module ApplicationHelper
   def javascript(*args)
     content_for(:head) { javascript_include_tag(*args) }
   end
+  
+  def active_tab(page)
+    return 'active' if current_page?(page)
+  end
+  
+  def tab(body, url)
+    content_tag(:li, nil, class: active_tab(url)) do
+      link_to body, url
+    end
+  end
 end

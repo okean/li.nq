@@ -8,5 +8,5 @@ class Url < ActiveRecord::Base
   uri_regex = URI::regexp
   
   validates :original, presence: true,
-                       format: { with: uri_regex, message: "Only valid URLs is allowed" }
+                       format: { with: uri_regex, message: "should be a valid URL" }
 end

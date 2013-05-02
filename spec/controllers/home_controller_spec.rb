@@ -15,4 +15,17 @@ describe HomeController do
       response.should have_selector("title", content: "li.nq")
     end
   end
+  
+  describe "GET 'about'" do
+
+    it "should be success" do
+      get :about
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :about
+      response.should have_selector("title", content: "About")
+    end
+  end
 end
