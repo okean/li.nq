@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130424183713) do
+ActiveRecord::Schema.define(:version => 20130510160513) do
 
   create_table "links", :force => true do |t|
     t.string   "identifier"
@@ -29,5 +29,16 @@ ActiveRecord::Schema.define(:version => 20130424183713) do
   end
 
   add_index "urls", ["original"], :name => "index_urls_on_original"
+
+  create_table "visits", :force => true do |t|
+    t.string   "ip"
+    t.string   "country"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "link_id"
+  end
+
+  add_index "visits", ["country"], :name => "index_visits_on_country"
+  add_index "visits", ["created_at"], :name => "index_visits_on_created_at"
 
 end

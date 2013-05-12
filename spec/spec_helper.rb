@@ -10,6 +10,7 @@ Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
   require File.expand_path("../../config/environment", __FILE__)
   require 'rspec/rails'
+  require 'webmock/rspec'
 
   # Requires supporting files with custom matchers and macros, etc,
   # in ./support/ and its subdirectories.
@@ -76,6 +77,7 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
 require 'rspec/autorun'
+require 'webmock/rspec'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -117,5 +119,10 @@ RSpec.configure do |config|
   def test_disable_preview(options = { visit: true })
     visit preview_index_path if options[:visit]
     click_button :disable
+  end
+  
+  def stub_ip_api
+    stub_http_request(:get, /.*ip-api\.com.*/).
+        to_return(body: '{"countryCode":"IT"}')
   end
 end

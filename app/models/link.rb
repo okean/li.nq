@@ -3,7 +3,8 @@ require 'obscenity/active_model'
 class Link < ActiveRecord::Base
   attr_accessible :identifier
 
-  has_one :url, dependent: :destroy
+  has_one :url,     dependent: :destroy
+  has_many :visits, dependent: :destroy 
 
   validates :identifier, presence: true,
                          uniqueness: { case_sensitive: false },

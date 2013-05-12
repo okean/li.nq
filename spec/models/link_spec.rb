@@ -28,6 +28,10 @@ describe Link do
     Link.new(@attr).should respond_to(:url)
   end
   
+  it "should have a visits attribute" do
+    Link.new(@attr).should respond_to(:visits)
+  end
+  
   describe "shorten method" do
     
     before(:each) do
@@ -65,6 +69,17 @@ describe Link do
       url = FactoryGirl.create(:url, link_id: link.id)
       link.destroy
       Url.find_by_id(url.id).should be_nil
+    end
+  end
+  
+  describe "Visits associations" do
+    
+    it "should destroy related visit stats" do
+      stub_ip_api
+      link = FactoryGirl.create(:link)
+      visit = FactoryGirl.create(:visit_data, link_id: link.id)
+      link.destroy
+      Visit.find_by_id(visit.id).should be_nil
     end
   end
 end
