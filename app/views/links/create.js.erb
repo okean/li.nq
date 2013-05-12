@@ -1,6 +1,10 @@
 <% if @link %>
     <% short_link = root_url + @link.identifier %>
     url = "<%= escape_javascript(link_to(short_link, short_link, target: '_blank')) %>"
+    
+    <% info_link = info_path(@link.identifier) %>
+    info = "<%= escape_javascript(link_to('stats', info_link)) %>"
+    
     $(".shorten_url").show();
-    $(".shorten_url").html("<strong>Well done!</strong> " + url);
-<% end %>
+    $(".shorten_url").html("<strong>Well done!</strong> " + url + " or check " + info + " for this li.nq");
+<% end %> 

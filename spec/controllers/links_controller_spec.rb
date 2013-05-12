@@ -3,6 +3,53 @@ require 'spec_helper'
 describe LinksController do
   render_views
 
+  describe "GET 'info'" do
+    
+    describe "failure" do
+      
+      it "should redirect to root path" do
+        get :info, short_url: 1
+        response.should redirect_to root_path
+      end
+      
+      it "should have a right message" do
+        get :info, short_url: 1
+        flash[:info].should =~ /This link is not defined yet/i
+      end
+    end
+    
+    describe "success" do
+      
+      before(:each) do
+        @url = FactoryGirl.create(:example_url)
+      end
+      
+      it "should render info page" do
+        get :info, short_url: @url.link.identifier
+        response.should render_template('links/info')
+      end
+      
+      it "should have 15 days as default number for bar chart" do
+        get :info, short_url: @url.link.identifier
+        assigns(:num_of_days).round.should == 15.days.ago.round
+      end
+      
+      it "should use provided day number for bar chart" do
+        get :info, short_url: @url.link.identifier, num_of_days: 7
+        assigns(:num_of_days).round.should == 7.days.ago.round
+      end
+      
+      it "should provide data for count days bar chart" do
+        stub_ip_api
+        visit = FactoryGirl.create(:visit_data, link_id: @url.link.id)
+        date = 1.day.ago.to_date.to_time(:utc).to_i * 1000
+        get :info, short_url: @url.link.identifier, num_of_days: 1
+        assigns(:count_days_bar).first[0] == date
+        assigns(:count_days_bar).first[1] == 1
+      end
+    end
+  end
+
   describe "POST 'create'" do
     
     describe "failure" do

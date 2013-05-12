@@ -18,6 +18,7 @@ module ApplicationHelper
   end
   
   def active_tab(page)
+    page = page.gsub(/#.*/, '')
     return 'active' if current_page?(page)
   end
   

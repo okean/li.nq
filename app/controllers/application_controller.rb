@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   include PreviewHelper
+  include LinksHelper
 
   after_filter :flash_to_headers
   

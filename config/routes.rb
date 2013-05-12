@@ -5,6 +5,7 @@ Linq::Application.routes.draw do
 
   resources :links, only: [:create]
   match "/:short_url" => "links#short_url"
+  match "/info/:short_url(/:num_of_days(/:map))" => "links#info", as: "info" 
   
   resources :preview, only: [:create, :destroy, :index], path: '/a/preview'
 

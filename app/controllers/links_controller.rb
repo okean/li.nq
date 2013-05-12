@@ -1,5 +1,17 @@
 class LinksController < ApplicationController
   
+  def info
+    @link = Link.find_by_identifier(params[:short_url])
+    
+    if @link.nil?
+      flash[:info] = "This link is not defined yet."
+      redirect_to root_path
+    else
+      @num_of_days = (params[:num_of_days] || 15).to_i.days.ago
+      @count_days_bar = count_days_bar(@num_of_days, params[:short_url])
+    end
+  end
+  
   def short_url
     @link = Link.find_by_identifier(params[:short_url])
     
@@ -22,7 +34,7 @@ class LinksController < ApplicationController
       if diff(@link.created_at) < 1
         flash[:success] = "A short Url was created! Share it!"
       else
-        flash[:info] = "Current link is already shortened! Use it!"
+        flash[:warning] = "Current link is already shortened! Use it!"
       end
     rescue => e 
       flash[:error] = e.message
