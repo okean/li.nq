@@ -13,5 +13,7 @@
 //= require jquery
 //= require highcharts
 //= require exporting
+//= require wice_grid
 //= require jquery_ujs
+//= require jquery-ui-1.9.2.custom.min
 //= require_tree .

@@ -85,8 +85,14 @@ describe "Users" do
       @url = root_path + @example_url.link.identifier
     end
     
-    it "should  allow navigation to stats page from preview link" do
+    it "should navigate to stats page from preview link" do
       visit @url
+      click_link "stats"
+      response.should render_template('links/info')
+    end
+    
+    it "should navigate to stats page from link index page" do
+      visit links_path
       click_link "stats"
       response.should render_template('links/info')
     end

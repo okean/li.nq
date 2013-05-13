@@ -174,4 +174,55 @@ describe LinksController do
       end
     end
   end
+  
+  describe "GET 'index'" do
+    
+    before(:each) do
+      stub_ip_api
+      @links = []
+      3.times do
+        @links << FactoryGirl.create(:link,
+                                 identifier: FactoryGirl.generate(:identifier))
+        url = FactoryGirl.create(:url, original: FactoryGirl.generate(:original),
+                                 link_id: @links.last.id)
+        rand(3).times do
+          visit = FactoryGirl.create(:visit_data, link_id: @links.last.id)
+        end
+      end
+    end
+    
+    it "should be successfull" do
+      get :index
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :index
+      response.should have_selector("title", content: "All links")
+    end
+    
+    it "should have an element for every link" do
+      get :index
+      @links.each do |link|
+        response.should have_selector("a", content: link.url.original,
+                                           href: link.url.original)
+      end
+    end
+    
+    it "should paginate links" do
+      8.times do
+        @links << FactoryGirl.create(:link,
+                                 identifier: FactoryGirl.generate(:identifier))
+        url = FactoryGirl.create(:url, original: FactoryGirl.generate(:original),
+                                 link_id: @links.last.id)
+        rand(3).times do
+          visit = FactoryGirl.create(:visit_data, link_id: @links.last.id)
+        end
+      end
+      get :index
+      response.should have_selector("div.pagination")
+      response.should have_selector("a", :href => "/links?grid%5Bpage%5D=2",
+                                         :content => "2")
+    end
+  end
 end

@@ -3,9 +3,9 @@ Linq::Application.routes.draw do
   root :to => 'home#index'
   match "/a/about" => "home#about", as: "about"
 
-  resources :links, only: [:create]
+  resources :links, only: [:create, :index]
   match "/:short_url" => "links#short_url"
-  match "/info/:short_url(/:num_of_days(/:map))" => "links#info", as: "info" 
+  match "/info/:short_url(/:num_of_days)" => "links#info", as: "info" 
   
   resources :preview, only: [:create, :destroy, :index], path: '/a/preview'
 

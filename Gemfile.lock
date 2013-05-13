@@ -63,6 +63,9 @@ GEM
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.7)
+    kaminari (0.14.1)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     mail (2.4.4)
       i18n (>= 0.4.0)
       mime-types (~> 1.16)
@@ -142,6 +145,8 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
+    wice_grid (3.2.1)
+      kaminari (>= 0.13.0)
 
 PLATFORMS
   x86-mingw32
@@ -164,3 +169,4 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   webmock (= 1.11.0)
   webrat (= 0.7.3)
+  wice_grid (= 3.2.1)

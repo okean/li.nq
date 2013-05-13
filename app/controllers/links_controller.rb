@@ -1,5 +1,13 @@
 class LinksController < ApplicationController
   
+  def index
+    @links_grid = initialize_grid(Link,
+        include: [:url, :visits],
+        order: 'links.created_at',
+        order_direction: 'desc',
+        per_page: 10)
+  end
+  
   def info
     @link = Link.find_by_identifier(params[:short_url])
     

@@ -1,4 +1,8 @@
 FactoryGirl.define do
+  sequence(:original) {|n| Faker::Internet.url }
+  
+  sequence(:identifier) {|n| n }
+  
   factory :link do
     identifier "lfls"
   end

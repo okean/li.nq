@@ -1,0 +1,27 @@
+<%= grid(@links_grid, allow_showing_all_records:  false) do |g|
+
+  g.column name:  'Original', attribute: 'original', model: 'Url' do |link|
+    link_to link.url.original, link.url.original 
+  end
+
+  g.column name:  'Shortened', attribute: 'identifier'  do |link|
+    link_to "/#{link.identifier}", link.identifier
+  end
+
+  g.column  name:  'Created Date', attribute: 'created_at' do |link|
+    link.created_at
+  end
+
+  g.column  name:  'Visits' do |link|
+    link.visits.size.to_i
+  end
+  
+  g.column in_csv: false do |link|
+    link_to('stats', info_path(link.identifier))
+  end
+  
+  g.blank_slate  do
+    "There are no records"
+  end
+  
+end -%>
