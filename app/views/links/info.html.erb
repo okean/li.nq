@@ -36,5 +36,11 @@
     <%= tab "#{nth} days", info_path(@link.identifier, nth, anchor: "bar") %>
   <% end %>
 </ul>
-
 <%= content_tag :div, "", id: "count_days_bar", data: { visits: @count_days_bar } %>
+
+<p class="lead">
+  Total number of visits by country
+</p>
+<%= content_tag :div, "", id: "count_country_bar",
+                          data: { countrycodes: @count_country_bar_countrycodes, 
+                                  visits: @count_country_bar_visits} %>

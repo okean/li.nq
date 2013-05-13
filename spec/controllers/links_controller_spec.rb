@@ -42,10 +42,19 @@ describe LinksController do
       it "should provide data for count days bar chart" do
         stub_ip_api
         visit = FactoryGirl.create(:visit_data, link_id: @url.link.id)
+        date = visit.created_at.to_date.to_time(:utc).to_i * 1000
+        get :info, short_url: @url.link.identifier, num_of_days: 1
+        assigns(:count_days_bar)[1][0].should == date
+        assigns(:count_days_bar)[1][1].should == 1
+      end
+      
+      it "should provide data for count country bar chart" do
+        stub_ip_api
+        visit = FactoryGirl.create(:visit_data, link_id: @url.link.id)
         date = 1.day.ago.to_date.to_time(:utc).to_i * 1000
         get :info, short_url: @url.link.identifier, num_of_days: 1
-        assigns(:count_days_bar).first[0] == date
-        assigns(:count_days_bar).first[1] == 1
+        assigns(:count_country_bar_countrycodes).first.should == visit.country
+        assigns(:count_country_bar_visits).first.should == 1
       end
     end
   end

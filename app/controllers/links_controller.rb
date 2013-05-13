@@ -9,6 +9,9 @@ class LinksController < ApplicationController
     else
       @num_of_days = (params[:num_of_days] || 15).to_i.days.ago
       @count_days_bar = count_days_bar(@num_of_days, params[:short_url])
+      
+      @count_country_bar_countrycodes, @count_country_bar_visits =
+          count_country_bar(params[:short_url])
     end
   end
   

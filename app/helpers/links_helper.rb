@@ -8,4 +8,11 @@ module LinksHelper
       [x, y]
     end
   end
+  
+  def count_country_bar(identifier)
+    visit_by_country = Visit.total_grouped_by_country(identifier)
+    countrycodes = visit_by_country.keys
+    visits = visit_by_country.values.map {|v| v.first.total_visits }
+    [countrycodes, visits]
+  end
 end
