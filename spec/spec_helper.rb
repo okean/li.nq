@@ -121,6 +121,13 @@ RSpec.configure do |config|
     click_button :disable
   end
   
+  def test_create_short_link
+    visit root_path
+    fill_in :original, with: "http://example.iana.org/"
+    fill_in :custom, with: "example"
+    click_button "Shorten it!"
+  end
+  
   def stub_ip_api
     stub_http_request(:get, /.*ip-api\.com.*/).
         to_return(body: '{"countryCode":"IT"}')

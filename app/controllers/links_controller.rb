@@ -22,6 +22,8 @@ class LinksController < ApplicationController
       flash[:info] = "I couldn't find a link for the URL you clicked."
       redirect_to root_path
     else
+      @link.visits.create(ip: get_remote_ip)
+      
       if first_time_preview? or has_preview_enabled?
         render 'short_url'
       else

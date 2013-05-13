@@ -140,7 +140,14 @@ describe LinksController do
   
     describe "success" do
       before(:each) do
+        stub_ip_api
         @example_url = FactoryGirl.create(:example_url)
+      end
+      
+      it "should record the call as a visit" do
+        lambda do
+          get :short_url, short_url: @example_url.link.identifier
+        end.should change(Visit, :count).by(1)
       end
       
       context "disable preview" do

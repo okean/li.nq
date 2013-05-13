@@ -15,4 +15,12 @@ module LinksHelper
     visits = visit_by_country.values.map {|v| v.first.total_visits }
     [countrycodes, visits]
   end
+  
+  def get_remote_ip
+    if addr = request.env["HTTP_X_FORWARDED_FOR"]
+      addr.split(',').first.strip
+    else
+      request.env["REMOTE_ADDR"]
+    end
+  end
 end

@@ -23,10 +23,7 @@ describe "Users" do
       
       it "create a short URL that represent a long URL" do
         lambda do
-          visit root_path
-          fill_in :original, with: "http://example.iana.org/"
-          fill_in :custom, with: "example"
-          click_button "Shorten it!"
+          test_create_short_link
           response.should render_template('home/index')
           response.should have_selector("div", class: "alert alert-success",
                                                content: "A short Url was created!")
@@ -38,6 +35,7 @@ describe "Users" do
   describe "visit the short URL" do
     
     before(:each) do
+      stub_ip_api
       @example_url = FactoryGirl.create(:example_url)
       @url = root_path + @example_url.link.identifier
     end
@@ -58,6 +56,12 @@ describe "Users" do
         response.should render_template('links/short_url')
       end
     end
+
+    it "should record a visit on shortened link call" do
+      lambda do
+        visit @url
+      end.should change(Visit, :count).by(1)
+    end
   end
   
   describe "enable/disable preview" do
@@ -70,6 +74,21 @@ describe "Users" do
       controller.should_not have_preview_enabled
       click_button "Enable"
       controller.should have_preview_enabled
+    end
+  end
+  
+  describe "view statistics" do
+
+    before(:each) do
+      stub_ip_api
+      @example_url = FactoryGirl.create(:example_url)
+      @url = root_path + @example_url.link.identifier
+    end
+    
+    it "should  allow navigation to stats page from preview link" do
+      visit @url
+      click_link "stats"
+      response.should render_template('links/info')
     end
   end
 end
