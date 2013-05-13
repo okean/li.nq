@@ -17,9 +17,9 @@ class Visit < ActiveRecord::Base
     visits = Link.joins(:visits).
                   where(:identifier => identifier, :"visits.created_at" => time_range).
                   group("date(visits.created_at)").
-                  select("visits.created_at, count(visits.ip) as total_visits").
-                  order("visits.created_at")
-    visits.group_by { |v| v.created_at.to_date }
+                  select("date(visits.created_at) as date, count(visits.ip) as total_visits").
+                  order("date(visits.created_at)")
+    visits.group_by { |v| v.date.to_date }
   end
   
   def self.total_grouped_by_country(identifier)
