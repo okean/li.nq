@@ -1,0 +1,10 @@
+.preview-header
+  %h1.text-info
+    Preview of #{root_url + @link.identifier}
+%p.lead
+  This li.nq redirects to: #{@link.url.original}
+%p
+  Proceed to this #{link_to "site", @link.url.original} or
+  check #{link_to "stats", info_path(@link.identifier)} for this li.nq.
+%hr/
+= render 'shared/preview_form'

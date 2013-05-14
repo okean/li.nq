@@ -1,0 +1,26 @@
+.jumbotron
+  %h1 Welcome to li.nq! The new way to share things.
+  %p.lead
+    By entering in a URL in the text field below, we will create
+    a short one that will not break in email postings and never expires.
+  = render partial: 'home/form'
+  .shorten_url.alert.alert-info{:style => "display: none"}
+.row-fluid.marketing
+  .span6
+    %h4 Short URLs
+    %p
+      Create short and easy to remember URLs. The most obvious benefit of having
+      it is that it's, well, short.
+    %h4 Preview
+    %p
+      Enable and disable preview before getting instanly redirected to a li.nq you are not aware.
+      See what's going on before going to the site.
+    %h4 Count cliks!
+    %p
+      View various statistics involving the short URL, including
+      the number of clicks and where the clicks come from
+  .span6
+    %h4 Visit them!
+    %p Users who visit the short URL will be redirected to the original link.
+    %h4 Profanity filter
+    %p Undesirable words are not allowed in the short URL.

@@ -1,0 +1,13 @@
+= form_tag '/links', remote: true, class: "form-url form-horizontal" do
+  .control-group
+    = label_tag 'original', 'Paste a link to shorten it', class: "control-label"
+    .controls
+      = text_field_tag 'original', nil, class: "input-block-level", |
+        placeholder: "Url", rows: "4"                               |
+  .control-group
+    = label_tag 'custom', 'Customize your link', class: "control-label"
+    .controls
+      = text_field_tag 'custom', nil, class: "input-block-level", placeholder: "Custom link"
+  .control-group
+    .controls
+      = submit_tag 'Shorten it!', class: "btn btn-success btn-primary"

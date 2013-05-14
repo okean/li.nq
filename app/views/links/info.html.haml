@@ -1,0 +1,29 @@
+- title("Statistics")
+.preview-header
+  %h1.text-info
+    li.nq statistics
+%table.table.table-striped.table-condensed
+  %tbody
+    %tr
+      %td Original
+      %td= link_to @link.url.original, @link.url.original
+    %tr
+      %td Shortened
+      %td= link_to root_url + @link.identifier, root_url + @link.identifier
+    %tr
+      %td Date created
+      %td= @link.created_at
+    %tr
+      %td Total number of visits
+      %td= @link.visits.size.to_s
+%p#bar.lead
+  Number of visits in the past #{pluralize(params[:num_of_days] || 15, 'day')}
+%ul.nav.nav-tabs
+  - [7, 14, 21, 30].each do |nth|
+    = tab "#{nth} days", info_path(@link.identifier, nth, anchor: "bar")
+= content_tag :div, "", id: "count_days_bar", data: { visits: @count_days_bar }
+%p.lead
+  Total number of visits by country
+= content_tag :div, "", id: "count_country_bar",         |
+  data: { countrycodes: @count_country_bar_countrycodes, |
+  visits: @count_country_bar_visits}                     |
