@@ -221,7 +221,7 @@ describe LinksController do
       end
       get :index
       response.should have_selector("div.pagination")
-      response.should have_selector("a", :href => "/links?grid%5Bpage%5D=2",
+      response.should have_selector("a", :href => "/a/links?grid%5Bpage%5D=2",
                                          :content => "2")
     end
   end

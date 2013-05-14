@@ -5,7 +5,7 @@
   end
 
   g.column name: 'Shortened', attribute: 'identifier' do |link|
-    link_to "/#{link.identifier}", link.identifier
+    link_to "/#{link.identifier}", root_url + link.identifier
   end
 
   g.column name: 'Created Date', attribute: 'created_at' do |link|

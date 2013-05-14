@@ -3,7 +3,7 @@ Linq::Application.routes.draw do
   root :to => 'home#index'
   match "/a/about" => "home#about", as: "about"
 
-  resources :links, only: [:create, :index]
+  resources :links, only: [:create, :index], path: '/a/links'
   match "/:short_url" => "links#short_url"
   match "/info/:short_url(/:num_of_days)" => "links#info", as: "info" 
   
