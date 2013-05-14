@@ -23,4 +23,8 @@ module LinksHelper
       request.env["REMOTE_ADDR"]
     end
   end
+  
+  def get_qr_image(url)
+    "https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=#{url}"#code
+  end
 end

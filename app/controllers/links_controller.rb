@@ -15,6 +15,7 @@ class LinksController < ApplicationController
       flash[:info] = "This link is not defined yet."
       redirect_to root_path
     else
+      @qr_image = get_qr_image(root_url + @link.identifier)
       @num_of_days = (params[:num_of_days] || 15).to_i.days.ago
       @count_days_bar = count_days_bar(@num_of_days, params[:short_url])
       
@@ -33,6 +34,7 @@ class LinksController < ApplicationController
       @link.visits.create(ip: get_remote_ip)
       
       if first_time_preview? or has_preview_enabled?
+        @qr_image = get_qr_image(root_url + @link.identifier)
         render 'short_url'
       else
         redirect_to @link.url.original, status: 301

@@ -56,6 +56,12 @@ describe LinksController do
         assigns(:count_country_bar_countrycodes).first.should == visit.country
         assigns(:count_country_bar_visits).first.should == 1
       end
+      
+      it "should have a qr code image" do
+        img_src = "https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=#{root_url + @url.link.identifier}"
+        get :info, short_url: @url.link.identifier
+        response.should have_selector("img", src: img_src)
+      end
     end
   end
 
@@ -148,6 +154,12 @@ describe LinksController do
         lambda do
           get :short_url, short_url: @example_url.link.identifier
         end.should change(Visit, :count).by(1)
+      end
+      
+      it "should have a qr code image" do
+        img_src = "https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl=#{root_url + @example_url.link.identifier}"
+        get :short_url, short_url: @example_url.link.identifier
+        response.should have_selector("img", src: img_src)
       end
       
       context "disable preview" do

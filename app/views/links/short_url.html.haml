@@ -1,4 +1,5 @@
 .preview-header
+  %img.qr-right{src: "#{@qr_image}"}
   %h1.text-info
     Preview of #{root_url + @link.identifier}
 %p.lead
@@ -6,5 +7,5 @@
 %p
   Proceed to this #{link_to "site", @link.url.original} or
   check #{link_to "stats", info_path(@link.identifier)} for this li.nq.
-%hr/
+%hr
 = render 'shared/preview_form'
