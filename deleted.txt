@@ -1,0 +1,4 @@
+app/assets/javascripts/home.js.coffee
+app/assets/javascripts/links.js.coffee
+app/assets/javascripts/preview.js.coffee
+app/assets/stylesheets/preview.css.scss

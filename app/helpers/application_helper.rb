@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def javascript(*args)
-    content_for(:head) { javascript_include_tag(*args) }
+    content_for(:js) { javascript_include_tag(*args) }
   end
   
   def active_tab(page)

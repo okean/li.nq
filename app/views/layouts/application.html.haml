@@ -15,8 +15,9 @@
           = content_tag :div, value, class: "alert alert-#{key}"
       = yield
       = render 'layouts/footer'
-    /
-      Le javascript
-      \==================================================
-    / Placed at the end of the document so the pages load faster
-    = javascript_include_tag "application"
+      /
+        Le javascript
+        \==================================================
+      / Placed at the end of the document so the pages load
+      = javascript_include_tag "application"
+      = yield :js

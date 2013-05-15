@@ -61,7 +61,13 @@ module Linq
 
     # Enable the asset pipeline
     config.assets.enabled = true
-
+    # So Rails do not to bootstrap your application during asset compilation in
+    config.assets.initialize_on_precompile = false
+    
+    # Yoo can add as many additional javascript manifest files as you need and include
+    # whatever individual files in those that you want to
+    config.assets.precompile += %w( *-bundle.js )
+    
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
   end
