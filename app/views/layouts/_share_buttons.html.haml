@@ -1,0 +1,31 @@
+.row.shared-buttons
+  - @path = "#{request.protocol}#{request.host}#{request.fullpath}"
+  .span1
+    / Google +1 button tag.
+    .g-plusone{"data-href" => @path, "data-size" => "medium"}
+    :javascript
+      (function() {
+        var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+        po.src = 'https://apis.google.com/js/plusone.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+      })();
+  .span2
+    / Facebook like button.
+    #fb-root
+    :javascript
+      (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+            fjs.parentNode.insertBefore(js, fjs);
+          }(document, 'script', 'facebook-jssdk'));
+    .fb-like{"data-href" => @path, "data-layout" => "button_count", "data-send" => "true", "data-show-faces" => "true", "data-width" => "450"}
+  .span1
+    / Twiteer tweet button.
+    %a.twitter-share-button{"data-dnt" => "true", "data-url" => @path, :href => "https://twitter.com/share"} Tweet
+    :javascript
+      !function(d,s,id){
+            var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);
+            js.id=id;js.src=p+'://platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');

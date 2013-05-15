@@ -13,6 +13,7 @@
       .flash_message
         - flash.each do |key, value|
           = content_tag :div, value, class: "alert alert-#{key}"
+      = render 'layouts/share_buttons'
       = yield
       = render 'layouts/footer'
       /

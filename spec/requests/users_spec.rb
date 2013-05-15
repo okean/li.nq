@@ -97,4 +97,15 @@ describe "Users" do
       response.should render_template('links/info')
     end
   end
+  
+  describe "share page on social networks" do
+    
+    it "should have approptiate buttons on Home page" do
+      visit root_path
+      response.should have_selector("div", class: "g-plusone", 'data-href' => root_url)
+      response.should have_selector("div", class: "fb-like", 'data-href' => root_url)
+      response.should have_selector("a", class: "twitter-share-button",
+                                          'data-url' => root_url)
+    end
+  end
 end
