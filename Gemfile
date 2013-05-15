@@ -8,6 +8,7 @@ gem 'bootstrap-sass', '2.0.4.2'
 gem 'httparty', '0.10.2'
 gem "wice_grid", '3.2.1'
 gem 'haml', '4.0.2'
+gem 'newrelic_rpm', '3.6.2.96'
 
 # Gems used only for assets and not required
 # in production environments by default.
