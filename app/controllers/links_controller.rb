@@ -43,19 +43,29 @@ class LinksController < ApplicationController
   end
   
   def create
-    custom = params[:custom].empty? ? nil : params[:custom]
+    custom = params[:custom]
+    custom = !custom || custom.empty? ? nil : custom
     begin
       @link = Link.shorten(params[:original], custom)
       if diff(@link.created_at) < 1
-        flash[:success] = "A short Url was created! Share it!"
+        flash.now[:success] = "A short Url was created! Share it!"
       else
-        flash[:warning] = "Current link is already shortened! Use it!"
+        flash.now[:warning] = "Current link is already shortened! Use it!"
       end
     rescue => e 
-      flash[:error] = e.message
+      flash.now[:error] = e.message
     end
     
     respond_to do |format|
+      format.json {
+        if flash[:error]
+          response = { status: "fail", message: "#{flash[:error]}",
+            url: "#{params[:original]}"}
+        else
+          response = { short_url: "#{root_url}#{@link.identifier}"}
+        end
+        render json: response.to_json
+      }
       format.html { render 'home/index' }
       format.js
     end

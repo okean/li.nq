@@ -82,6 +82,13 @@ describe LinksController do
         end
       end
       
+      describe "JSON" do
+        it "should have a flash message" do
+          get :create, custom: "", original: "", format: :json
+          flash[:error].should_not be_nil
+        end
+      end
+      
       describe "HTTP" do        
         it "should render index page" do
           post :create, custom: "", original: ""
@@ -112,6 +119,13 @@ describe LinksController do
         it "should render index page" do
           xhr :post, :create, custom: @custom, original: @url
           response.should render_template('links/create')
+        end
+      end
+      
+      describe "JSON" do
+        it "should render successfully" do
+          get :create, custom: @custom, original: @url, format: :json
+          response.should be_success
         end
       end
       
