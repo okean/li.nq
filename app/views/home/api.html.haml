@@ -1,0 +1,31 @@
+- title("API")
+%h2 li.nq API Documentation
+%p.lead About
+%p.muted
+  li.nq exposes its data via an Application Programming Interface (API),
+  so developers can interact in a programmatic way with the li.nq application.
+%p.lead Usage limits
+%p.muted
+  At the moment there are no restrictions on how many requests you are
+  allowed to make. You are free to use li.nq for non-commercial use.
+%p.lead JSON Usage
+%p.muted
+  To receive the response in JSON format, send a GET request to
+%pre.snippet
+  %code http://linq.herokuapp.com/a/api-create?original=http://example.iana.org/&custom=example
+%p.muted
+  You should supply an URL address and/or a custom name to customize your link.
+%p.lead Parammeters
+%ul
+  %li Original - the original URL
+  %li Custom - a custom label you want for the short URL
+%p.lead Response
+%p.muted
+  A successful request will return the following:
+%pre.snippet
+  {"short_url": "http://linq.herokuapp.com/example"}
+%p.muted
+  A failed request will return the following:
+%pre.snippet
+  {"status":"fail","message":"Validation failed: Custom name has already been taken","url":"http://example.iana.org/"}
+  

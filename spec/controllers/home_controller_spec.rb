@@ -16,6 +16,19 @@ describe HomeController do
     end
   end
   
+  describe "GET 'api'" do
+    
+    it "should be success" do
+      get :api
+      response.should be_success
+    end
+    
+    it "should have the right title" do
+      get :api
+      response.should have_selector("title", content: "API")
+    end
+  end
+  
   describe "GET 'about'" do
 
     it "should be success" do

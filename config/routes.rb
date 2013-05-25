@@ -2,11 +2,12 @@ Linq::Application.routes.draw do
 
   root :to => 'home#index'
   match "/a/about" => "home#about", as: "about"
+  match "/a/api" => "home#api", as: "api"
 
   resources :links, only: [:create, :index], path: '/a/links'
   match "/:short_url" => "links#short_url"
   match "/info/:short_url(/:num_of_days)" => "links#info", as: "info"
-  match "/a/api" => "links#create", :defaults => { :format => 'json' }, as: "api"
+  match "/a/api-create" => "links#create", defaults: { format: 'json' }
   
   resources :preview, only: [:create, :destroy, :index], path: '/a/preview'
 
